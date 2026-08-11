@@ -1,7 +1,7 @@
 -- SS_toggleSearchHotkey
 --
 -- Adds the SS_TOGGLE_SEARCH button
--- the settings menu's bottom button row.
+--
 
 SS_toggleSearchHotkey = {}
 SS_toggleSearchHotkey.onPressed = function() end -- stub defined on map load by mods main driver: SS_settingsSearch

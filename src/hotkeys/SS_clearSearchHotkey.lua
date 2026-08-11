@@ -1,7 +1,7 @@
 -- SS_clearSearchHotkey
 --
 -- Adds the SS_CLEAR_SEARCH button
--- the settings menu's bottom button row.
+--
 
 SS_clearSearchHotkey = {}
 SS_clearSearchHotkey.onPressed = function() end -- stub defined on map load by mods main driver: SS_settingsSearch
