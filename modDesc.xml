@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="111" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+  <author>Evan Kirsch</author>
+  <version>0.0.0.1</version>
+  <title>
+      <en>Settings Search</en>
+      <de>Einstellungssuche</de>
+  </title>
+  <description>
+    <en><![CDATA[
+Adds a live search box to the in-game settings menu so you can quickly find a setting by name instead of scrolling through the whole list. Type to filter; matching settings stay visible, everything else is hidden until you clear the search.
+
+Dev Console Commands:
+  - `ssToggleDebug` - toggles debug mode for the mod
+
+GitHub link: https://github.com/EvanKirsch/fs25-settings-search
+    ]]></en>
+    <de><![CDATA[
+Fügt dem Einstellungsmenü ein Live-Suchfeld hinzu, mit dem du eine Einstellung schnell anhand ihres Namens findest, anstatt die gesamte Liste zu durchsuchen. Tippe, um zu filtern; passende Einstellungen bleiben sichtbar, alle anderen werden ausgeblendet, bis du die Suche zurücksetzt.
+
+Befehle für die Entwicklerkonsole:
+  - `ssToggleDebug` – Aktiviert/Deaktiviert den Debug-Modus für die Mod.
+
+GitHub-Link: https://github.com/EvanKirsch/fs25-settings-search
+    ]]></de>
+  </description>
+  <iconFilename>icon_SettingsSearch.dds</iconFilename>
+  <l10n filenamePrefix="translations/translation" />
+  <multiplayer supported="true"/>
+  <extraSourceFiles>
+    <sourceFile filename="src/SS_settingsSearch.lua" />
+  </extraSourceFiles>
+</modDesc>

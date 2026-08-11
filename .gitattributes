@@ -1,0 +1,10 @@
+.git export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+README.md export-ignore
+CONTRIBUTING.md export-ignore
+CLAUDE.md export-ignore
+LICENSE export-ignore
+/screenshots export-ignore
+/dataS export-ignore
+/.github export-ignore
