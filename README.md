@@ -1,15 +1,17 @@
 # :mag: SS - Farming Simulator 25 Settings Search
-Adds a live search box to the settings menu so you can filter down to a setting by name instead of scrolling through the whole list.
+Adds a search box to the settings menu so you can filter down to a setting - or a key binding - by name instead of scrolling through the whole list.
 
 ![screenshot 1](https://github.com/EvanKirsch/fs25-settings-search/blob/master/screenshots/Screenshot_1.png)
 
 ## :spiral_notepad: Implementation Details
 Adds a search hotkey to the settings menu.
 
-- **S** : Opens a search box. Type a setting's name and confirm to filter the current subcategory's list down to matching rows.
+- **S** : Opens a search box. Type a name and confirm to filter the current tab's list down to matching rows.
 - **R** : Clears the current search and shows every row again.
 
 Both hotkeys are rebindable in the game's settings.
+
+Search works on the **General**, **Game**, and **Graphics** tabs (filters by setting name) and the **Controls** tab (filters by action name). The **Server Settings** and **Devices** tabs aren't searchable yet.
 
 ## :gear: Manual Install Instructions
 1. Download `FS25_SettingsSearch.zip` from the latest release on the [releases page](https://github.com/EvanKirsch/fs25-settings-search/releases)

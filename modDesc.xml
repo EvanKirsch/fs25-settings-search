@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="111" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
   <author>Evan Kirsch</author>
-  <version>0.0.0.1</version>
+  <version>1.0.0.0</version>
   <title>
       <en>Settings Search</en>
       <de>Einstellungssuche</de>
   </title>
   <description>
     <en><![CDATA[
-Adds a live search box to the in-game settings menu so you can quickly find a setting by name instead of scrolling through the whole list.
+Adds a search box to the in-game settings menu so you can quickly find a setting by name instead of scrolling through the whole list - or find a key binding by its action name on the Controls tab.
+
+Press S while the settings menu is open to search the current tab (General, Game, Graphics, or Controls). Matching rows stay visible and everything else is hidden until you clear the search. Press R to clear the search without reopening the search box.
+
+Note: the "Server Settings" and "Devices" tabs aren't searchable yet.
 
 Hotkeys:
   S -> open the search box
@@ -16,9 +20,18 @@ Hotkeys:
 (can be changed in the Input Settings)
 
 GitHub link: https://github.com/EvanKirsch/fs25-settings-search
+
+Changelog
+---
+1.0.0.0:
+  - Initial release
     ]]></en>
     <de><![CDATA[
-Fügt dem Einstellungsmenü ein Live-Suchfeld hinzu, mit dem du eine Einstellung schnell anhand ihres Namens findest, anstatt die gesamte Liste zu durchsuchen.
+Fügt dem Einstellungsmenü ein Suchfeld hinzu, mit dem du eine Einstellung schnell anhand ihres Namens findest, anstatt die gesamte Liste zu durchsuchen - oder auf der Registerkarte Steuerung eine Tastenbelegung anhand ihres Aktionsnamens findest.
+
+Drücke S bei geöffnetem Einstellungsmenü, um die aktuelle Registerkarte zu durchsuchen (Allgemein, Spiel, Grafik oder Steuerung). Passende Einträge bleiben sichtbar, alle anderen werden ausgeblendet, bis du die Suche zurücksetzt. Drücke R, um die Suche zurückzusetzen, ohne das Suchfeld erneut zu öffnen.
+
+Hinweis: Die Registerkarten „Server-Einstellungen" und „Geräte" sind noch nicht durchsuchbar.
 
 Hotkeys:
   S -> Suchfeld öffnen
@@ -26,6 +39,11 @@ Hotkeys:
 (kann in den Eingabeeinstellungen geändert werden)
 
 GitHub-Link: https://github.com/EvanKirsch/fs25-settings-search
+
+Änderungsprotokoll
+---
+1.0.0.0:
+  - Erstveröffentlichung
     ]]></de>
   </description>
   <iconFilename>icon_SettingsSearch.dds</iconFilename>
