@@ -34,6 +34,8 @@ GitHub-Link: https://github.com/EvanKirsch/fs25-settings-search
   <extraSourceFiles>
     <sourceFile filename="src/hotkeys/SS_toggleSearchHotkey.lua" />
     <sourceFile filename="src/hotkeys/SS_clearSearchHotkey.lua" />
+    <sourceFile filename="src/SS_rowVisibilityRules.lua" />
+    <sourceFile filename="src/SS_settingsFilter.lua" />
     <sourceFile filename="src/SS_settingsSearch.lua" />
   </extraSourceFiles>
   <actions>
