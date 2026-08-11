@@ -1,6 +1,7 @@
 -- SS_settingsFilter
 --
 -- Owns applying and clearing settings search filter
+--  Should be used through SS_filterDelegate
 --
 
 SS_settingsFilter = {}
