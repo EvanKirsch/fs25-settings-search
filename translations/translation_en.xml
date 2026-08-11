@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <texts>
-        <text name="ui_search_placeholder" text="Type to search settings..."/>
-        <text name="ui_search_label" text="Search: %s"/>
+        <text name="input_SS_TOGGLE_SEARCH" text="Toggle Search"/>
+        <text name="ui_search_dialogTitle" text="Search Settings"/>
     </texts>
 </l10n>

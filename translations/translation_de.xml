@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <texts>
-        <text name="ui_search_placeholder" text="Zum Suchen der Einstellungen tippen..."/>
-        <text name="ui_search_label" text="Suche: %s"/>
+        <text name="input_SS_TOGGLE_SEARCH" text="Suche umschalten"/>
+        <text name="ui_search_dialogTitle" text="Einstellungen durchsuchen"/>
     </texts>
 </l10n>
