@@ -12,7 +12,7 @@ SS_settingsSearch.query = ""
 SS_settingsSearch.settingsFrame = nil
 
 function SS_settingsSearch:loadMap()
-    InGameMenuSettingsFrame.onFrameOpen = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameOpen, SS_settingsSearch.onFrameOpen)
+    InGameMenuSettingsFrame.onFrameOpen = Utils.prependedFunction(InGameMenuSettingsFrame.onFrameOpen, SS_settingsSearch.onFrameOpen)
     InGameMenuSettingsFrame.onFrameClose = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameClose, SS_settingsSearch.onFrameClose)
     SS_clearSearchHotkey.onPressed = SS_settingsSearch.onClearSearch
     SS_toggleSearchHotkey.onPressed = SS_settingsSearch.onToggleSearch
@@ -24,7 +24,7 @@ function SS_settingsSearch.onFrameOpen(settingsFrame)
 end
 
 function SS_settingsSearch.onFrameClose(settingsFrame)
-    SS_settingsFilter.clearAllFilters(settingsFrame)
+    SS_filterDelegate.clearAllFilters(settingsFrame)
     SS_settingsSearch.query = ""
     SS_settingsSearch.settingsFrame = nil
 end
@@ -46,7 +46,7 @@ function SS_settingsSearch.onClearSearch()
     SS_settingsSearch.query = ""
 
     if SS_settingsSearch.settingsFrame ~= nil then
-        SS_settingsFilter.clearActiveFilter(SS_settingsSearch.settingsFrame)
+        SS_filterDelegate.clearActiveFilter(SS_settingsSearch.settingsFrame)
     end
 end
 
@@ -59,7 +59,7 @@ function SS_settingsSearch:onSearchTextEntered(text, clickOk)
     SS_settingsSearch.query = text or ""
 
     if SS_settingsSearch.settingsFrame ~= nil then
-        SS_settingsFilter.applyFilter(SS_settingsSearch.settingsFrame, SS_settingsSearch.query)
+        SS_filterDelegate.applyFilter(SS_settingsSearch.settingsFrame, SS_settingsSearch.query)
     end
 end
 
