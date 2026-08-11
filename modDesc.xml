@@ -8,22 +8,12 @@
   </title>
   <description>
     <en><![CDATA[
-Adds a live search box to the in-game settings menu so you can quickly find a setting by name instead of scrolling through the whole list. Press S while the settings menu is open to pop out the search box, type to filter, matching settings stay visible and everything else is hidden until you clear the search.
-
-Hotkeys: S -> toggle the settings search box (can be changed in the Input Settings)
-
-Dev Console Commands:
-  - `ssToggleDebug` - toggles debug mode for the mod
+Adds a live search box to the in-game settings menu so you can quickly find a setting by name instead of scrolling through the whole list.
 
 GitHub link: https://github.com/EvanKirsch/fs25-settings-search
     ]]></en>
     <de><![CDATA[
-Fügt dem Einstellungsmenü ein Live-Suchfeld hinzu, mit dem du eine Einstellung schnell anhand ihres Namens findest, anstatt die gesamte Liste zu durchsuchen. Drücke S bei geöffnetem Einstellungsmenü, um das Suchfeld einzublenden. Tippe, um zu filtern; passende Einstellungen bleiben sichtbar, alle anderen werden ausgeblendet, bis du die Suche zurücksetzt.
-
-Hotkeys: S -> Sucheingabe im Einstellungsmenü umschalten (kann in den Eingabeeinstellungen geändert werden)
-
-Befehle für die Entwicklerkonsole:
-  - `ssToggleDebug` – Aktiviert/Deaktiviert den Debug-Modus für die Mod.
+Fügt dem Einstellungsmenü ein Live-Suchfeld hinzu, mit dem du eine Einstellung schnell anhand ihres Namens findest, anstatt die gesamte Liste zu durchsuchen.
 
 GitHub-Link: https://github.com/EvanKirsch/fs25-settings-search
     ]]></de>
@@ -32,14 +22,20 @@ GitHub-Link: https://github.com/EvanKirsch/fs25-settings-search
   <l10n filenamePrefix="translations/translation" />
   <multiplayer supported="true"/>
   <extraSourceFiles>
+    <sourceFile filename="src/hotkeys/SS_toggleSearchHotkey.lua" />
+    <sourceFile filename="src/hotkeys/SS_clearSearchHotkey.lua" />
     <sourceFile filename="src/SS_settingsSearch.lua" />
   </extraSourceFiles>
   <actions>
     <action name="SS_TOGGLE_SEARCH" category="MENU"/>
+    <action name="SS_CLEAR_SEARCH" category="MENU"/>
   </actions>
   <inputBinding>
     <actionBinding action="SS_TOGGLE_SEARCH">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_s" />
+    </actionBinding>
+    <actionBinding action="SS_CLEAR_SEARCH">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_r" />
     </actionBinding>
   </inputBinding>
 </modDesc>

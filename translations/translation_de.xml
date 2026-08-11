@@ -2,6 +2,7 @@
 <l10n>
     <texts>
         <text name="input_SS_TOGGLE_SEARCH" text="Suche umschalten"/>
+        <text name="input_SS_CLEAR_SEARCH" text="Suche zurücksetzen"/>
         <text name="ui_search_dialogTitle" text="Einstellungen durchsuchen"/>
     </texts>
 </l10n>

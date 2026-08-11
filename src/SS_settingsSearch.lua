@@ -1,5 +1,6 @@
 -- SS_settingsSearch
 --
+-- Main Driver for SS_settingsSearch
 
 SS_settingsSearch = {}
 SS_settingsSearch.dir = g_currentModDirectory
@@ -9,9 +10,10 @@ SS_settingsSearch.query = ""
 SS_settingsSearch.settingsFrame = nil
 
 function SS_settingsSearch:loadMap()
-    InGameMenuSettingsFrame.updateButtons = Utils.appendedFunction(InGameMenuSettingsFrame.updateButtons, SS_settingsSearch.addSearchButton)
     InGameMenuSettingsFrame.onFrameOpen = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameOpen, SS_settingsSearch.onFrameOpen)
     InGameMenuSettingsFrame.onFrameClose = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameClose, SS_settingsSearch.onFrameClose)
+    SS_clearSearchHotkey.onPressed = SS_settingsSearch.onClearSearch
+    SS_toggleSearchHotkey.onPressed = SS_settingsSearch.onToggleSearch
 end
 
 function SS_settingsSearch.onFrameOpen(settingsFrame)
@@ -23,12 +25,6 @@ function SS_settingsSearch.onFrameClose(settingsFrame)
     SS_settingsSearch.clearFilter(settingsFrame)
     SS_settingsSearch.settingsFrame = nil
     SS_settingsSearch.query = ""
-end
-
-function SS_settingsSearch.addSearchButton(settingsFrame)
-    SS_settingsSearch.searchButtonInfo.text = g_i18n:getText("input_SS_TOGGLE_SEARCH")
-    table.insert(settingsFrame.menuButtonInfo, SS_settingsSearch.searchButtonInfo)
-    settingsFrame:setMenuButtonInfoDirty()
 end
 
 -- SS_TOGGLE_SEARCH callback: opens the vanilla text input dialog.
@@ -43,10 +39,15 @@ function SS_settingsSearch.onToggleSearch()
     )
 end
 
-SS_settingsSearch.searchButtonInfo = {
-    inputAction = InputAction.SS_TOGGLE_SEARCH,
-    callback = SS_settingsSearch.onToggleSearch,
-}
+-- SS_CLEAR_SEARCH callback: resets the query and re-shows every row without
+-- opening the search dialog.
+function SS_settingsSearch.onClearSearch()
+    SS_settingsSearch.query = ""
+
+    if SS_settingsSearch.settingsFrame ~= nil then
+        SS_settingsSearch.clearFilter(SS_settingsSearch.settingsFrame)
+    end
+end
 
 -- TextInputDialog callback: called as target:onSearchTextEntered(text, clickOk, args).
 function SS_settingsSearch:onSearchTextEntered(text, clickOk)

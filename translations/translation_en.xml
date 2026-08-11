@@ -2,6 +2,7 @@
 <l10n>
     <texts>
         <text name="input_SS_TOGGLE_SEARCH" text="Toggle Search"/>
+        <text name="input_SS_CLEAR_SEARCH" text="Clear Search"/>
         <text name="ui_search_dialogTitle" text="Search Settings"/>
     </texts>
 </l10n>
