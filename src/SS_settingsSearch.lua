@@ -9,6 +9,16 @@ SS_settingsSearch.modName = g_currentModName
 SS_settingsSearch.query = ""
 SS_settingsSearch.settingsFrame = nil
 
+SS_settingsSearch.conditionalRowVisibility = {
+    multiVoiceModeBox = function() return g_currentMission.missionDynamicInfo.isMultiplayer end,
+    multiVolumeVoiceBox = function() return g_currentMission.missionDynamicInfo.isMultiplayer end,
+    multiVolumeVoiceInputBox = function() return g_currentMission.missionDynamicInfo.isMultiplayer end,
+    checkShowMultiplayerNamesBox = function() return g_currentMission.missionDynamicInfo.isMultiplayer end,
+    multiVoiceInputSensitivityBox = function() return g_currentMission.missionDynamicInfo.isMultiplayer end,
+    multiRealBeaconLightBrightnessBox = function() return g_beaconLightManager:getNumOfLights() > 0 end,
+    checkCameraCheckCollisionBox = function() return g_modIsLoaded.FS25_disableVehicleCameraCollision or g_isDevelopmentVersion end,
+}
+
 function SS_settingsSearch:loadMap()
     InGameMenuSettingsFrame.onFrameOpen = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameOpen, SS_settingsSearch.onFrameOpen)
     InGameMenuSettingsFrame.onFrameClose = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameClose, SS_settingsSearch.onFrameClose)
@@ -80,8 +90,21 @@ function SS_settingsSearch.getActiveLayout(settingsFrame)
     return nil
 end
 
--- Hides every row whose title text does not contain the current query
--- (case-insensitive). An empty query shows everything again.
+-- True unless this row has a conditional-visibility rule (see
+-- conditionalRowVisibility above) and that rule currently says no.
+function SS_settingsSearch.isAllowedForCurrentState(settingsFrame, row)
+    for fieldName, isVisible in pairs(SS_settingsSearch.conditionalRowVisibility) do
+        if settingsFrame[fieldName] == row then
+            return isVisible()
+        end
+    end
+
+    return true
+end
+
+-- Hides every row whose title text does not contain the current query, and
+-- keeps conditionally-hidden rows (see conditionalRowVisibility) hidden
+-- regardless of query.
 function SS_settingsSearch.applyFilter(settingsFrame)
     local layout = SS_settingsSearch.getActiveLayout(settingsFrame)
     if layout == nil then
@@ -92,14 +115,16 @@ function SS_settingsSearch.applyFilter(settingsFrame)
 
     for _, row in pairs(layout.elements) do
         if row.name ~= "sectionHeader" then
-            local visible = query == "" or SS_settingsSearch.rowMatches(row, query)
-            row:setVisible(visible)
+            local matchesQuery = query == "" or SS_settingsSearch.rowMatches(row, query)
+            local allowedForCurrentState = SS_settingsSearch.isAllowedForCurrentState(settingsFrame, row)
+            row:setVisible(matchesQuery and allowedForCurrentState)
         end
     end
 
     layout:invalidateLayout()
 end
 
+-- Re-shows rows, still respecting each row's conditional-visibility rule.
 function SS_settingsSearch.clearFilter(settingsFrame)
     local layout = SS_settingsSearch.getActiveLayout(settingsFrame)
     if layout == nil then
@@ -107,7 +132,9 @@ function SS_settingsSearch.clearFilter(settingsFrame)
     end
 
     for _, row in pairs(layout.elements) do
-        row:setVisible(true)
+        if row.name ~= "sectionHeader" then
+            row:setVisible(SS_settingsSearch.isAllowedForCurrentState(settingsFrame, row))
+        end
     end
 
     layout:invalidateLayout()
