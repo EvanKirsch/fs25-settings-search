@@ -32,9 +32,9 @@ function SS_settingsSearch.onFrameOpen(settingsFrame)
 end
 
 function SS_settingsSearch.onFrameClose(settingsFrame)
-    SS_settingsSearch.clearFilter(settingsFrame)
-    SS_settingsSearch.settingsFrame = nil
+    SS_settingsSearch.clearAllFilters(settingsFrame)
     SS_settingsSearch.query = ""
+    SS_settingsSearch.settingsFrame = nil
 end
 
 -- SS_TOGGLE_SEARCH callback: opens the vanilla text input dialog.
@@ -49,13 +49,12 @@ function SS_settingsSearch.onToggleSearch()
     )
 end
 
--- SS_CLEAR_SEARCH callback: resets the query and re-shows every row without
--- opening the search dialog.
+-- SS_CLEAR_SEARCH callback: resets the query and re-shows every row without opening the search dialog.
 function SS_settingsSearch.onClearSearch()
     SS_settingsSearch.query = ""
 
     if SS_settingsSearch.settingsFrame ~= nil then
-        SS_settingsSearch.clearFilter(SS_settingsSearch.settingsFrame)
+        SS_settingsSearch.clearActiveFilter(SS_settingsSearch.settingsFrame)
     end
 end
 
@@ -72,16 +71,16 @@ function SS_settingsSearch:onSearchTextEntered(text, clickOk)
     end
 end
 
--- The settings frame has one row layout per subcategory (General, Game,
--- Graphics, ...); only one is visible at a time, so search that one.
-function SS_settingsSearch.getActiveLayout(settingsFrame)
-    local candidates = {
+function SS_settingsSearch.getAllLayouts(settingsFrame)
+    return {
         settingsFrame.generalSettingsLayout,
         settingsFrame.gameSettingsLayout,
         settingsFrame.graphicSettingsLayout,
     }
+end
 
-    for _, layout in ipairs(candidates) do
+function SS_settingsSearch.getActiveLayout(settingsFrame)
+    for _, layout in ipairs(SS_settingsSearch.getAllLayouts(settingsFrame)) do
         if layout ~= nil and layout:getIsVisible() then
             return layout
         end
@@ -90,8 +89,7 @@ function SS_settingsSearch.getActiveLayout(settingsFrame)
     return nil
 end
 
--- True unless this row has a conditional-visibility rule (see
--- conditionalRowVisibility above) and that rule currently says no.
+-- True unless this row has a conditional-visibility rule
 function SS_settingsSearch.isAllowedForCurrentState(settingsFrame, row)
     for fieldName, isVisible in pairs(SS_settingsSearch.conditionalRowVisibility) do
         if settingsFrame[fieldName] == row then
@@ -102,9 +100,8 @@ function SS_settingsSearch.isAllowedForCurrentState(settingsFrame, row)
     return true
 end
 
--- Hides every row whose title text does not contain the current query, and
--- keeps conditionally-hidden rows (see conditionalRowVisibility) hidden
--- regardless of query.
+-- Hides every row whose title text does not contain the current query, and keeps
+-- conditionally-hidden rows (see conditionalRowVisibility) hidden regardless of query.
 function SS_settingsSearch.applyFilter(settingsFrame)
     local layout = SS_settingsSearch.getActiveLayout(settingsFrame)
     if layout == nil then
@@ -124,9 +121,7 @@ function SS_settingsSearch.applyFilter(settingsFrame)
     layout:invalidateLayout()
 end
 
--- Re-shows rows, still respecting each row's conditional-visibility rule.
-function SS_settingsSearch.clearFilter(settingsFrame)
-    local layout = SS_settingsSearch.getActiveLayout(settingsFrame)
+function SS_settingsSearch.clearFilterOnLayout(settingsFrame, layout)
     if layout == nil then
         return
     end
@@ -138,6 +133,16 @@ function SS_settingsSearch.clearFilter(settingsFrame)
     end
 
     layout:invalidateLayout()
+end
+
+function SS_settingsSearch.clearActiveFilter(settingsFrame)
+    SS_settingsSearch.clearFilterOnLayout(settingsFrame, SS_settingsSearch.getActiveLayout(settingsFrame))
+end
+
+function SS_settingsSearch.clearAllFilters(settingsFrame)
+    for _, layout in ipairs(SS_settingsSearch.getAllLayouts(settingsFrame)) do
+        SS_settingsSearch.clearFilterOnLayout(settingsFrame, layout)
+    end
 end
 
 function SS_settingsSearch.rowMatches(row, query)
