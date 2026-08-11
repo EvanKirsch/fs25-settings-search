@@ -10,10 +10,20 @@
     <en><![CDATA[
 Adds a live search box to the in-game settings menu so you can quickly find a setting by name instead of scrolling through the whole list.
 
+Hotkeys:
+  S -> open the search box
+  R -> clear the current search
+(can be changed in the Input Settings)
+
 GitHub link: https://github.com/EvanKirsch/fs25-settings-search
     ]]></en>
     <de><![CDATA[
 Fügt dem Einstellungsmenü ein Live-Suchfeld hinzu, mit dem du eine Einstellung schnell anhand ihres Namens findest, anstatt die gesamte Liste zu durchsuchen.
+
+Hotkeys:
+  S -> Suchfeld öffnen
+  R -> Aktuelle Suche zurücksetzen
+(kann in den Eingabeeinstellungen geändert werden)
 
 GitHub-Link: https://github.com/EvanKirsch/fs25-settings-search
     ]]></de>
