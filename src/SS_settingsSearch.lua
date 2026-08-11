@@ -108,11 +108,9 @@ function SS_settingsSearch.applyFilter(settingsFrame)
         return
     end
 
-    local query = SS_settingsSearch.query:lower()
-
     for _, row in pairs(layout.elements) do
         if row.name ~= "sectionHeader" then
-            local matchesQuery = query == "" or SS_settingsSearch.rowMatches(row, query)
+            local matchesQuery = SS_settingsSearch.query == "" or SS_settingsSearch.rowMatches(row, SS_settingsSearch.query)
             local allowedForCurrentState = SS_settingsSearch.isAllowedForCurrentState(settingsFrame, row)
             row:setVisible(matchesQuery and allowedForCurrentState)
         end
@@ -151,7 +149,7 @@ function SS_settingsSearch.rowMatches(row, query)
         return true
     end
 
-    return title:lower():find(query, 1, true) ~= nil
+    return title:lower():find(query:lower(), 1, true) ~= nil
 end
 
 -- Row titles live on different child indices depending on the control type
